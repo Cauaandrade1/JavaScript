@@ -1,22 +1,21 @@
-function criaCalculadora(){
-    return {
-        display: document.querySelector('.display'),
+function CriaCalculadora(){
+        display = document.querySelector('.display')
 
 
-        inicia(){
+        this.inicia = () => {
             this.cliqueBotoes()
             this.pressionaEnter()
-        },
+        }
 
-        pressionaEnter(){
-            this.display.addEventListener('keyup', (e) => {
+        this.pressionaEnter = () => {
+            display.addEventListener('keyup', (e) => {
                 if (e.keyCode === 13){
                     this.realizaConta()
                 }
             })
-        },
+        }
 
-        cliqueBotoes(){
+        this.cliqueBotoes = () => {
             document.addEventListener('click', (e) => {
                 const el = e.target
 
@@ -36,19 +35,19 @@ function criaCalculadora(){
                     this.realizaConta()
                 }
             })
-        },
+        }
 
-        btnParaDisplay(valor){
-            this.display.value += valor
-        },
-        clearParaDisplay(){
-            this.display.value = ' '
-        },
-        deleteOne(){
-            this.display.value = this.display.value.slice(0, -1)
-        },
-        realizaConta(){
-            let conta = this.display.value
+        this.btnParaDisplay = (valor) =>{
+            display.value += valor
+        }
+        this.clearParaDisplay =()=>{
+            display.value = ' '
+        }
+        this.deleteOne =()=>{
+            display.value = this.display.value.slice(0, -1)
+        }
+        this.realizaConta =()=>{
+            let conta = display.value
 
             try{
                 conta = eval(conta)
@@ -58,15 +57,14 @@ function criaCalculadora(){
                     return
                 }
 
-                this.display.value = conta
+                display.value = conta
                 return
             } catch(e){
                 alert('Conta inválida!')
                 return
             }
         }
-    }
 }
 
-const calculadora = criaCalculadora()
+const calculadora = new CriaCalculadora()
 calculadora.inicia()
